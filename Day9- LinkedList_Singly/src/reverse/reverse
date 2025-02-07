@@ -1,0 +1,83 @@
+class Main{
+    public static void main (String[] args)
+    {
+        LinkedList list=new LinkedList();
+        list.insert(1);
+        list.insert(2);
+        list.insert(3);
+        //list.middleinsert(4,2);
+        list.deleteend();
+        list.display();
+        list.printReverse();
+    }
+}
+
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data=data;
+        this.next=null;
+    }
+}
+class LinkedList
+{   Node head,tail;
+    void insert(int data)
+    {
+
+        Node newnode=new Node(data);
+        if(head==null){
+            head=newnode;
+            tail=newnode;
+        }
+        else{
+            tail.next=newnode;
+            tail=newnode;
+
+        }
+    }
+    void middleinsert(int data,int pos){
+        Node newnode= new Node(data);
+        Node temp=head;
+        for(int i=0;i<pos-1;i++){
+            temp=temp.next;
+            newnode.next=temp.next;
+            temp.next=newnode;
+        }
+
+    }
+    void delete(){
+        head=head.next;
+
+    }
+    void deleteend(){
+        Node temp=head;
+        while(temp.next.next!=null){
+            temp=temp.next;
+        }
+        temp.next=null;
+    }
+    void display()
+    {
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+"->");
+            temp=temp.next;
+
+        }
+        System.out.println();
+    }
+    //print the linked list in a reverse order
+    void printReverse(Node node) {
+    if (node == null) return;  // Base case: Stop at the end
+    printReverse(node.next);   // Recursive call
+    System.out.print(node.data + " "); // Print on return
+}
+
+// Wrapper method to call from main
+void printReverse() {
+    printReverse(head);
+    System.out.println();  // Move to a new line
+}
+
+}
